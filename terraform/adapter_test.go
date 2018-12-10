@@ -25,6 +25,13 @@ func TestLevelGovernedByEnvVar(t *testing.T) {
   assert.Equal(t, logger.Level, golog.InfoLevel)
 }
 
+func TestLevelGovernedByEnvVarCaseInsensitive(t *testing.T) {
+  os.Setenv("TF_LOG", "INFO")
+  logger := golog.New()
+  Adapt(logger)
+  assert.Equal(t, logger.Level, golog.InfoLevel)
+}
+
 func TestDefaultPrintToStdErr(t *testing.T) {
   logger := golog.New()
   Adapt(logger)

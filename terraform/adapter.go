@@ -4,6 +4,7 @@ import (
   "github.com/kataras/golog"
   "github.com/kataras/pio"
   "encoding/json"
+  "strings"
   "os"
 )
 
@@ -15,7 +16,7 @@ type terraformLog struct {
 
 func Adapt(logger *golog.Logger) {
   terraformLogLevel := os.Getenv("TF_LOG")
-  logger.SetLevel(terraformLogLevel)
+  logger.SetLevel(strings.ToLower(terraformLogLevel))
   logger.SetTimeFormat("2006-01-02T15:04:05.000000Z07:00")
   logger.Printer = pio.NewTextPrinter("terraform", os.Stderr).EnableDirectOutput().Hijack(logHijack)
 }
